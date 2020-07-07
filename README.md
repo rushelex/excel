@@ -1,1 +1,1 @@
-Pure Javascript project
+Pure JavaScript Excel
