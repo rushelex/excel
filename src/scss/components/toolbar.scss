@@ -1,0 +1,16 @@
+.excel__toolbar {
+  position: absolute;
+  top: map-get(v.$header, height);
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: map-get(v.$toolbar, height);
+  padding: 7px 10px;
+  display: flex;
+  border-top: 1px solid map-get(v.$global, border-color);
+  border-bottom: 1px solid map-get(v.$global, border-color);
+
+  .button {
+    @include m.button(green);
+  }
+}
