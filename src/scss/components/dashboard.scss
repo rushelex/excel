@@ -1,0 +1,89 @@
+.db {
+  &__header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1000;
+    height: map-get(v.$db, header-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px 2px rgba(60, 64, 67, 0.15);
+  }
+
+  &__new {
+    margin-top: map-get(v.$db, header-height);
+    padding: 1.5rem;
+    background-color: #dadce0;
+  }
+
+  &__view {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  &__create {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    color: #000000;
+    font-size: 1.5rem;
+    text-decoration: none;
+    text-align: center;
+
+    &:hover {
+      cursor: pointer;
+      border-color: green;
+      color: green;
+    }
+  }
+
+  &__table {
+    padding: 1rem;
+  }
+
+  &__list-header {
+    margin-bottom: 10px;
+    padding: 0 12px;
+    display: flex;
+    justify-content: space-between;
+    color: #202124;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  &__list {
+    @include m.clearList;
+  }
+
+  &__record {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px 12px 16px;
+    margin-bottom: 10px;
+
+    &:hover {
+      background-color: #e6f4ea;
+      border-radius: 25px;
+    }
+
+    > a {
+      text-decoration: none;
+      cursor: pointer;
+      color: #202124;
+      font-size: 14px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

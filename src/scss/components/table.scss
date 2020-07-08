@@ -1,0 +1,66 @@
+.excel__table {
+  position: absolute;
+  top: map-get(v.$header, height) + map-get(v.$toolbar, height) +
+    map-get(v.$formula, height);
+  right: 0;
+  left: 0;
+  // height: 100%;
+  padding-bottom: 2px;
+  overflow-x: auto;
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    min-height: 20px;
+    height: map-get(v.$table, row-height);
+  }
+
+  .row-info {
+    min-width: map-get(v.$table, info-cell-width);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid map-get(v.$global, border-color);
+    border-top: none;
+    border-left: none;
+    background-color: #f8f9fa;
+  }
+
+  .row-data {
+    display: flex;
+  }
+
+  .column {
+    min-width: 40px;
+    width: map-get(v.$table, cell-width);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border: 1px solid map-get(v.$global, border-color);
+    border-top: none;
+    border-left: none;
+  }
+
+  .cell {
+    position: relative;
+    min-width: 40px;
+    width: map-get(v.$table, cell-width);
+    height: 100%;
+    padding: 5px;
+    border: 1px solid #e2e3e3;
+    border-top: none;
+    border-left: none;
+    color: #111111;
+    white-space: nowrap;
+    outline: none;
+
+    &.selected {
+      z-index: 1;
+      border: none;
+      outline: 2px solid #3c74ff;
+    }
+  }
+}
