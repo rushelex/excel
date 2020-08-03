@@ -1,13 +1,15 @@
 .excel__header {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
+  z-index: 1;
   width: 100%;
   height: map-get(v.$header, height);
   padding: 8px 4px 0;
   display: flex;
   justify-content: space-between;
+  background-color: #ffffff;
 
   .input {
     height: 20px;
