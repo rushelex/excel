@@ -5,23 +5,32 @@ const CODES = {
 
 function createRow(index, content) {
   return `
-    <div class="row">
-      <div class="row-info">${index ? index : ''}</div>
+    <div class="row" data-type="resizable">
+      <div class="row-info">
+        ${index ? index : ''}
+        ${
+          index
+            ? '<div class="row-resize" data-resize="row"><div class="row-resize__inner"></div></div>'
+            : ''
+        }
+      </div>
       <div class="row-data">${content}</div>
     </div>
   `
 }
 
-function toColumn(col) {
+function toColumn(col, index) {
   return `
-  <div class="column">${col}</div>
+  <div class="column" data-type="resizable" data-col="${index}">
+    ${col}
+    <div class="col-resize" data-resize="col"><div class="col-resize__inner"></div></div>
+  </div>
   `
 }
 
-function toCell() {
+function toCell(_, col) {
   return `
-    <!-- <div class="cell selected" contenteditable></div> -->
-    <div class="cell" contenteditable></div>
+    <div class="cell" data-col="${col}" contenteditable></div>
   `
 }
 

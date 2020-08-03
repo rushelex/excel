@@ -12,6 +12,7 @@
   ],
   "rules": {
     "require-jsdoc": 0,
-    "no-debugger": "warn"
+    "no-debugger": "warn",
+    "no-prototype-builtins": "off"
   }
 }

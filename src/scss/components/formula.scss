@@ -1,12 +1,14 @@
 .excel__formula {
-  position: absolute;
+  position: fixed;
   top: map-get(v.$header, height) + map-get(v.$toolbar, height);
   right: 0;
   left: 0;
+  z-index: 1;
   width: 100%;
   height: map-get(v.$formula, height);
   display: flex;
   align-items: center;
+  background-color: #ffffff;
   border-bottom: 1px solid map-get(v.$global, border-color);
 
   .info {
