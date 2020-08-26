@@ -1,20 +1,34 @@
-import { DOMListener } from '@core/DOMListener'
+import { DOMListener } from "@core/DOMListener";
 
 export class ExcelComponent extends DOMListener {
   constructor($root, options = {}) {
-    super($root, options.listeners)
-    this.name = options.name || ''
+    super($root, options.listeners);
+    this.name = options.name || "";
+    this.emitter = options.emitter;
+    this.unsubscribers = [];
+    this.prepare();
   }
 
+  prepare() {}
+
   toHTML() {
-    return ''
+    return "";
+  }
+
+  $emit(event, ...args) {
+    this.emitter.emit(event, ...args);
+  }
+
+  $on(event, fn) {
+    const unsub = this.emitter.subscribe(event, fn);
+    this.unsubscribers.push(unsub);
   }
 
   init() {
-    this.initDOMListeners()
+    this.initDOMListeners();
   }
 
   destroy() {
-    this.removeDOMListeners()
+    this.removeDOMListeners(this.unsubscribers.forEach((unsub) => unsub()));
   }
 }
