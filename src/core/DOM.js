@@ -1,74 +1,110 @@
 class DOM {
   constructor(selector) {
     this.$el =
-      typeof selector === 'string' ? document.querySelector(selector) : selector
+      typeof selector === "string"
+        ? document.querySelector(selector)
+        : selector;
   }
 
   html(html) {
-    if (typeof html === 'string') {
-      this.$el.innerHTML = html
+    if (typeof html === "string") {
+      this.$el.innerHTML = html;
     }
-    return this.$el.outerHTML.trim()
+    return this.$el.outerHTML.trim();
+  }
+
+  text(text) {
+    if (typeof text === "string") {
+      this.$el.textContent = text;
+    }
+    return this.$el.textContent.trim();
   }
 
   clear() {
-    this.html('')
-    return this
+    this.html("");
+    return this;
   }
 
   on(eventType, callback) {
-    this.$el.addEventListener(eventType, callback)
+    this.$el.addEventListener(eventType, callback);
   }
 
   off(eventType, callback) {
-    this.$el.removeEventListener(eventType, callback)
+    this.$el.removeEventListener(eventType, callback);
   }
 
   append(node) {
-    if (node instanceof DOM) node = node.$el
+    if (node instanceof DOM) node = node.$el;
     if (Element.prototype.append) {
-      this.$el.append(node)
+      this.$el.append(node);
     } else {
-      this.$el.appendChild(node)
+      this.$el.appendChild(node);
     }
-    return this
+    return this;
   }
 
   get data() {
-    return this.$el.dataset
+    return this.$el.dataset;
   }
 
   closest(selector) {
-    return $(this.$el.closest(selector))
+    return $(this.$el.closest(selector));
   }
 
   getCoords() {
-    return this.$el.getBoundingClientRect()
+    return this.$el.getBoundingClientRect();
   }
 
   find(selector) {
-    return $(this.$el.querySelector(selector))
+    return $(this.$el.querySelector(selector));
   }
 
   findAll(selector) {
-    return this.$el.querySelectorAll(selector)
+    return this.$el.querySelectorAll(selector);
   }
 
   css(styles = {}) {
     Object.keys(styles).forEach((key) => {
-      this.$el.style[key] = styles[key]
-    })
+      this.$el.style[key] = styles[key];
+    });
+  }
+
+  id(parse = false) {
+    if (parse) {
+      const parsed = this.id().split(":");
+      return {
+        row: +parsed[0],
+        col: +parsed[1],
+      };
+    } else {
+      return this.data.id;
+    }
+  }
+
+  addClass(className) {
+    this.$el.classList.add(className);
+    return this;
+  }
+
+  focus() {
+    this.$el.focus();
+    return this;
+  }
+
+  removeClass(className) {
+    this.$el.classList.remove(className);
+    return this;
   }
 }
 
 export function $(selector) {
-  return new DOM(selector)
+  return new DOM(selector);
 }
 
-$.create = (tagName, classes = '') => {
-  const el = document.createElement(tagName)
+$.create = (tagName, classes = "") => {
+  const el = document.createElement(tagName);
   if (classes) {
-    el.classList.add(classes)
+    el.classList.add(classes);
   }
-  return $(el)
-}
+  return $(el);
+};
