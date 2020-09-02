@@ -1,9 +1,12 @@
+@use '~@/scss/utility/_variables' as v;
+@use '~@/scss/utility/_mixins' as m;
+
 .excel__header {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: 10;
   width: 100%;
   height: map-get(v.$header, height);
   padding: 8px 4px 0;

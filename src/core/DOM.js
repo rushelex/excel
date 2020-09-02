@@ -14,8 +14,11 @@ class DOM {
   }
 
   text(text) {
-    if (typeof text === "string") {
+    if (typeof text !== "undefined") {
       this.$el.textContent = text;
+    }
+    if (this.$el.tagName.toLowerCase() === "input") {
+      return this.$el.value.trim();
     }
     return this.$el.textContent.trim();
   }
@@ -63,6 +66,13 @@ class DOM {
     return this.$el.querySelectorAll(selector);
   }
 
+  getStyles(styles = []) {
+    return styles.reduce((res, s) => {
+      res[s] = this.$el.style[s];
+      return res;
+    }, {});
+  }
+
   css(styles = {}) {
     Object.keys(styles).forEach((key) => {
       this.$el.style[key] = styles[key];
@@ -84,6 +94,14 @@ class DOM {
   addClass(className) {
     this.$el.classList.add(className);
     return this;
+  }
+
+  attr(name, value) {
+    if (value) {
+      this.$el.setAttribute(name, value);
+    } else {
+      return this.$el.getAttribute(name);
+    }
   }
 
   focus() {

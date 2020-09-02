@@ -1,3 +1,6 @@
+@import "~@/assets/fonts/stylesheet.css";
+@import '~normalize.css';
+
 * {
   margin: 0;
   padding: 0;
@@ -17,3 +20,10 @@ body {
 .material-icons {
   user-select: none;
 }
+
+// Components
+@import 'components/header';
+@import 'components/toolbar';
+@import 'components/formula';
+@import 'components/table';
+@import 'components/dashboard';

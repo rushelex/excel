@@ -1,3 +1,6 @@
+@use '~@/scss/utility/_variables' as v;
+@use '~@/scss/utility/_mixins' as m;
+
 .excel__table {
   position: absolute;
   top: map-get(v.$header, height) + map-get(v.$toolbar, height) +
@@ -12,15 +15,6 @@
     flex-direction: row;
     min-height: 24px;
     height: map-get(v.$table, row-height);
-
-    // &:nth-of-type(1) {
-    //   position: fixed;
-    //   z-index: 1;
-    // }
-
-    // &:nth-of-type(2) {
-    //   margin-top: map-get(v.$table, row-height);
-    // }
   }
 
   .row-info {
@@ -61,8 +55,6 @@
     min-width: 40px;
     width: map-get(v.$table, cell-width);
     height: 100%;
-    display: flex;
-    align-items: center;
     padding: 5px;
     border: 1px solid #e2e3e3;
     border-top: none;
@@ -73,7 +65,7 @@
 
     &.selected {
       z-index: 1;
-      border: none;
+      border-color: transparent;
       outline: 2px solid map-get(v.$global, primary-color);
     }
   }
