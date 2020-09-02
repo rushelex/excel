@@ -1,3 +1,6 @@
+@use '~@/scss/utility/_variables' as v;
+@use '~@/scss/utility/_mixins' as m;
+
 .db {
   &__header {
     position: fixed;

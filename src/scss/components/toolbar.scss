@@ -1,9 +1,12 @@
+@use '~@/scss/utility/_variables' as v;
+@use '~@/scss/utility/_mixins' as m;
+
 .excel__toolbar {
   position: fixed;
   top: map-get(v.$header, height);
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: 10;
   width: 100%;
   height: map-get(v.$toolbar, height);
   padding: 7px 10px;
@@ -14,5 +17,22 @@
 
   .button {
     @include m.button(green);
+
+    &--format_align_left {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    &--format_align_center {
+      border-radius: 0;
+    }
+    &--format_align_right {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    &--format_bold,
+    &--format_italic,
+    &--format_underlined {
+      margin-left: 5px;
+    }
   }
 }
