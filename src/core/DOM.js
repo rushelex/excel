@@ -9,6 +9,7 @@ class DOM {
   html(html) {
     if (typeof html === "string") {
       this.$el.innerHTML = html;
+      return this;
     }
     return this.$el.outerHTML.trim();
   }
