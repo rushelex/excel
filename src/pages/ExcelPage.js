@@ -1,28 +1,31 @@
-import { Page } from "@core/Page";
+import { Page } from "@core/page/Page";
+import { StateProcessor } from "@core/page/StateProcessor";
 import { createStore } from "@core/store/createStore";
-import { debounce, storage } from "@core/utils";
 import { rootReducer } from "@store/rootReducer";
 import { normalizeInitialState } from "@store/initialState";
+import { LocalStorageClient } from '@/shared/LocalStorageClient';
 import { Excel } from "@/components/excel/Excel";
 import { Header } from "@/components/header/Header";
 import { Toolbar } from "@/components/toolbar/Toolbar";
 import { Formula } from "@/components/formula/Formula";
 import { Table } from "@/components/table/Table";
 
-function storageName(param) {
-  const id = param ? param : Date.now().toString();
-  return "excel:" + id;
-}
-
 export class ExcelPage extends Page {
-  getRoot() {
-    const state = storage(storageName(this.params));
-    const store = createStore(rootReducer, normalizeInitialState(state));
-    const stateListener = debounce((state) => {
-      storage(storageName(this.params), state);
-    }, 300);
+  constructor(param) {
+    super(param);
 
-    store.subscribe(stateListener);
+    this.storeSub = null;
+    this.proseccor = new StateProcessor(
+        new LocalStorageClient(this.params)
+    );
+  }
+
+  async getRoot() {
+    const state = await this.proseccor.get();
+    const initialState = normalizeInitialState(state)
+    const store = createStore(rootReducer, initialState);
+
+    this.storeSub = store.subscribe(this.proseccor.listen);
 
     this.excel = new Excel({
       components: [Header, Toolbar, Formula, Table],
@@ -38,5 +41,6 @@ export class ExcelPage extends Page {
 
   destroy() {
     this.excel.destroy();
+    this.storeSub.unsubscribe();
   }
 }
