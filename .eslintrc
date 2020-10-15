@@ -3,13 +3,15 @@
   "env": {
     "es6": true,
     "browser": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
   "extends": [
     "eslint:recommended",
     "google",
     "prettier"
   ],
+  "plugins": [ "jest" ],
   "rules": {
     "require-jsdoc": 0,
     "no-debugger": "warn",
